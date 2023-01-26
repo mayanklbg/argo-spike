@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: manage-namespaces
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mayanklbg/argo-spike.git
+    targetRevision: HEAD
+    path: namespaces
+  destination:
+    server: https://kubernetes.default.svc
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kustomize-manage-namespaces
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mayanklbg/argo-spike.git
+    targetRevision: HEAD
+    path: kustomize/namespaces
+  destination:
+    server: https://kubernetes.default.svc
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: helm-namespace-config
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+      - filepath: namespaces/ns-1/ns.yaml
+        name: helm-namespace1
+      - filepath: namespaces/ns-2/ns.yaml
+        name: helm-namespace2
+      - filepath: namespaces/ns-3/ns.yaml
+        name: helm-namespace3
+  template:
+    metadata:
+      name: '{{name}}-helm-namespace-config'
+    spec:
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+      source:
+        repoURL: https://github.com/mayanklbg/argo-spike.git
+        targetRevision: HEAD
+        path: helm-namespace-config
+        helm:
+          valueFiles:
+          - '{{filepath}}'
+      destination:
+        server: 'https://kubernetes.default.svc'
+        # namespace: openshift-gitops

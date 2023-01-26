@@ -1,0 +1,28 @@
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: kustomize-namespace1
+
+bases:
+- ../../base
+
+patches:
+- target:
+    kind: Namespace
+    name: default-dev
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: kustomize-namespace1
+- target:
+    kind: ResourceQuota
+    name: resource-quota
+  patch: "- op: replace\n  path: /metadata/name\n  value: quota-kustomize-namespace1\n- op: replace\n  path: /spec/hard/limits.cpu\n  value: 1 \n- op: replace\n  path: /spec/hard/services\n  value: 10 "
+- target:
+    kind: LimitRange
+    name: limit-range
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: limit-kustomize-namespace1
