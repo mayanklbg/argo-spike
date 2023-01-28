@@ -12,48 +12,48 @@ spec:
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
-  - '*'
+  - 'https://github.com/mayanklbg/argo-spike.git'
 
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   # Destination clusters can be identified by 'server', 'name', or both.
   destinations:
   - server: https://kubernetes.default.svc
-    name: in-cluster
+    # name: in-cluster
     # namespace: guestbook
 
-  # Deny all cluster-scoped resources from being created, except for Namespace
-  clusterResourceWhitelist:
-  - group: ''
-    kind: Namespace
+  # # Deny all cluster-scoped resources from being created, except for Namespace
+  # clusterResourceWhitelist:
+  # - group: ''
+  #   kind: Namespace
 
-  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
-  namespaceResourceBlacklist:
-  - group: ''
-    kind: ResourceQuota
-  - group: ''
-    kind: LimitRange
-  - group: ''
-    kind: NetworkPolicy
+  # # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
+  # namespaceResourceBlacklist:
+  # - group: ''
+  #   kind: ResourceQuota
+  # - group: ''
+  #   kind: LimitRange
+  # - group: ''
+  #   kind: NetworkPolicy
 
-  # Deny all namespaced-scoped resources from being created, except for Deployment and StatefulSet
-  namespaceResourceWhitelist:
-  - group: 'apps'
-    kind: Deployment
-  - group: 'apps'
-    kind: StatefulSet
+  # # Deny all namespaced-scoped resources from being created, except for Deployment and StatefulSet
+  # namespaceResourceWhitelist:
+  # - group: 'apps'
+  #   kind: Deployment
+  # - group: 'apps'
+  #   kind: StatefulSet
 
-  # Enables namespace orphaned resource monitoring.
-  orphanedResources:
-    warn: false
+  # # Enables namespace orphaned resource monitoring.
+  # orphanedResources:
+  #   warn: false
 
-  # roles:
-  # # A role which provides read-only access to all applications in the project
-  # - name: read-only
-  #   description: Read-only privileges to my-project
-  #   policies:
-  #   - p, proj:my-project:read-only, applications, get, my-project/*, allow
-  #   groups:
-  #   - my-oidc-group
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to my-project
+    policies:
+    - p, proj:my-project:read-only, applications, get, my-project/*, allow
+    groups:
+    - my-oidc-group
 
   # # A role which provides sync privileges to only the guestbook-dev application, e.g. to provide
   # # sync privileges to a CI system
