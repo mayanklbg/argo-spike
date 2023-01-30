@@ -40,8 +40,14 @@ spec:
         repoURL:  https://github.com/mayanklbg/argo-spike.git
         targetRevision: HEAD
         path: '{{path}}'
+        directory:
+          recurse: true
       destination:
         server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
         # namespace: '{{path.basename}}'
   # source:
   #   repoURL:
