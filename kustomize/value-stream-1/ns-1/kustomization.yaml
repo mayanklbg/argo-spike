@@ -14,15 +14,15 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: kustomize-namespace1
+      value: kustomize-vals1--namespace1
 - target:
     kind: ResourceQuota
     name: resource-quota
-  patch: "- op: replace\n  path: /metadata/name\n  value: quota-kustomize-namespace1\n- op: replace\n  path: /spec/hard/limits.cpu\n  value: 1 \n- op: replace\n  path: /spec/hard/services\n  value: 10 "
+  patch: "- op: replace\n  path: /metadata/name\n  value: quota-kustomize-vals1-namespace1\n- op: replace\n  path: /spec/hard/limits.cpu\n  value: 1 \n- op: replace\n  path: /spec/hard/services\n  value: 10 "
 - target:
     kind: LimitRange
     name: limit-range
   patch: |-
     - op: replace
       path: /metadata/name
-      value: limit-kustomize-namespace1
+      value: limit-kustomize-vals1-namespace1

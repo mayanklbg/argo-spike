@@ -13,21 +13,11 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: kustomize-namespace2
+      value: kustomize-vals1-namespace2
 - target:
     kind: ResourceQuota
     name: resource-quota
   patch: |-
     - op: replace
       path: /metadata/name
-      value: quota-kustomize-namespace2
-- target:
-    kind: LimitRange
-    name: limit-range
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: limit-kustomize-namespace2
-    - op: replace
-      path: /spec/limits/0/defaultRequest/cpu
-      value: 150m
+      value: quota-kustomize-vals1-namespace2
