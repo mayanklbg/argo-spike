@@ -1,16 +1,16 @@
 bases:
-- /ns-1
-- /ns-2
-- /ns-3
+- ./ns-1
+- ./ns-2
+- ./ns-3
 
-patches:
-- target:
-    kind: LimitRange
-    name: limit-range
-  patch: |-
-    - op: replace
-      path: /metadata/name
-      value: limit-kustomize-vals1
-    - op: replace
-      path: /spec/limits/0/defaultRequest/cpu
-      value: 250m
+# patches:
+# - target:
+#     kind: LimitRange
+#     name: limit-range
+#   patch: |-
+#     - op: replace
+#       path: /metadata/name
+#       value: limit-kustomize-vals1
+#     - op: replace
+#       path: /spec/limits/0/defaultRequest/cpu
+#       value: 250m
