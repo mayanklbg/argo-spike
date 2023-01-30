@@ -3,4 +3,4 @@ commonLabels:
 bases:
 - ../base
 patches:
-- namespace.yaml
+- ./value-stream-1/namespace.yaml
