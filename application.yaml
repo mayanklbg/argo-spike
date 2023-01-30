@@ -33,7 +33,7 @@ spec:
       - path: kustomize/pdev
   template:
     metadata:
-      name: '{{path[0]}}'
+      name: 'namespaces'
     spec:
       project: default
       source:
