@@ -19,7 +19,7 @@ metadata:
   name: kustomize-manage-namespaces-for-dev
   namespace: argocd
 spec:
-  project: namespace-project
+  project: default
   source:
     repoURL: https://github.com/mayanklbg/argo-spike.git
     targetRevision: HEAD
@@ -33,7 +33,7 @@ metadata:
   name: kustomize-manage-namespaces-for-pdev
   namespace: argocd
 spec:
-  project: namespace-project
+  project: default
   source:
     repoURL: https://github.com/mayanklbg/argo-spike.git
     targetRevision: HEAD
