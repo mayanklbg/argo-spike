@@ -1,0 +1,9 @@
+commonLabels:
+  env: dev
+  value-stream: "value-stream-2"
+
+resources:
+- ./namespace-2
+
+# patchesStrategicMerge:
+# - ./value-stream-1/namespace.yaml
