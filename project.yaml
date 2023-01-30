@@ -9,7 +9,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   # Project description
-  description: Example Project
+  description: Project to manage namespaces
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
