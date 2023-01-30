@@ -1,7 +1,7 @@
 bases:
-- ./ns-1
-- ./ns-2
-- ./ns-3
+- /ns-1
+- /ns-2
+- /ns-3
 
 patches:
 - target:
