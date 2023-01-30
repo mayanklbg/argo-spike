@@ -24,7 +24,7 @@ spec:
   source:
     repoURL: https://github.com/mayanklbg/argo-spike.git
     targetRevision: HEAD
-    path: kustomize/value-stream-1
+    path: kustomize/dev
   destination:
     server: https://kubernetes.default.svc
 ---

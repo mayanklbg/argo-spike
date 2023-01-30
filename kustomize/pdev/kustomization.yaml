@@ -1,0 +1,6 @@
+commonLabels:
+  env: pdev
+bases:
+- ../../base
+patches:
+- replica_count.yaml
