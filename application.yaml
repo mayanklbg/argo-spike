@@ -14,32 +14,55 @@
 # ---
 
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: kustomize-manage-namespaces-for-dev
+  name: kustomize-manage-namespaces
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/mayanklbg/argo-spike.git
-    targetRevision: HEAD
-    path: kustomize/dev
-  destination:
-    server: https://kubernetes.default.svc
+  generators:
+  - git:
+      repoURL: https://github.com/mayanklbg/argo-spike.git
+      revision: HEAD
+      directories:
+      - path: kustomize/dev
+      # - path: kustomize/pdev
+  - git:
+      repoURL: https://github.com/mayanklbg/argo-spike.git
+      revision: HEAD
+      directories:
+      - path: kustomize/pdev
+  template:
+    metadata:
+      name: '{{path[0]}}'
+    spec:
+      project: default
+      source:
+        repoURL:  https://github.com/mayanklbg/argo-spike.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        # namespace: '{{path.basename}}'
+  # source:
+  #   repoURL:
+  #   targetRevision: HEAD
+  #   path: kustomize/dev
+  # destination:
+  #   server: https://kubernetes.default.svc
 ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kustomize-manage-namespaces-for-pdev
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/mayanklbg/argo-spike.git
-    targetRevision: HEAD
-    path: kustomize/pdev
-  destination:
-    server: https://kubernetes.default.svc
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: kustomize-manage-namespaces-for-pdev
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/mayanklbg/argo-spike.git
+#     targetRevision: HEAD
+#     path: kustomize/pdev
+#   destination:
+#     server: https://kubernetes.default.svc
 # apiVersion: argoproj.io/v1alpha1
 # kind: ApplicationSet
 # metadata:
