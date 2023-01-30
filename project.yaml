@@ -1,7 +1,8 @@
+
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: my-project
+  name: namespace-project
   namespace: argocd
   # Finalizer that ensures that project is not deleted until it is not referenced by any application
   finalizers:
@@ -22,9 +23,9 @@ spec:
     # namespace: guestbook
 
   # # Deny all cluster-scoped resources from being created, except for Namespace
-  # clusterResourceWhitelist:
-  # - group: ''
-  #   kind: Namespace
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
 
   # # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
   # namespaceResourceBlacklist:
@@ -36,24 +37,22 @@ spec:
   #   kind: NetworkPolicy
 
   # # Deny all namespaced-scoped resources from being created, except for Deployment and StatefulSet
-  # namespaceResourceWhitelist:
-  # - group: 'apps'
-  #   kind: Deployment
-  # - group: 'apps'
-  #   kind: StatefulSet
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
 
   # # Enables namespace orphaned resource monitoring.
   # orphanedResources:
   #   warn: false
 
-  roles:
-  # A role which provides read-only access to all applications in the project
-  - name: read-only
-    description: Read-only privileges to my-project
-    policies:
-    - p, proj:my-project:read-only, applications, get, my-project/*, allow
-    groups:
-    - my-oidc-group
+  # roles:
+  # # A role which provides read-only access to all applications in the project
+  # - name: read-only
+  #   description: Read-only privileges to my-project
+  #   policies:
+  #   - p, proj:my-project:read-only, applications, get, my-project/*, allow
+  #   groups:
+  #   - my-oidc-group
 
   # # A role which provides sync privileges to only the guestbook-dev application, e.g. to provide
   # # sync privileges to a CI system
