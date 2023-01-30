@@ -17,7 +17,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kustomize-manage-namespaces-for-vs
+  name: kustomize-manage-namespaces-for-dev
   namespace: argocd
 spec:
   project: default
@@ -28,7 +28,20 @@ spec:
   destination:
     server: https://kubernetes.default.svc
 ---
-
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kustomize-manage-namespaces-for-pdev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mayanklbg/argo-spike.git
+    targetRevision: HEAD
+    path: kustomize/pdev
+  destination:
+    server: https://kubernetes.default.svc
+---
 # apiVersion: argoproj.io/v1alpha1
 # kind: ApplicationSet
 # metadata:
