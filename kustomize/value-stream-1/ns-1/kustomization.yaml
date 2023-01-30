@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: kustomize-namespace1
 
 bases:
-- ../../base
+- ../
 
 patches:
 - target:
