@@ -98,7 +98,7 @@ spec:
       source:
         repoURL: https://github.com/mayanklbg/argo-spike.git
         targetRevision: HEAD
-        path: adons
+        path: adons/certificate-manager
         helm:
           valueFiles:
           - '{{filepath}}'
