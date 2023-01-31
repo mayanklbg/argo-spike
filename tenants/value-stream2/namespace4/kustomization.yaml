@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: namespace4
 
 bases:
-- ../../base
+- ../../resource-templates
 
 patches:
 - target:
