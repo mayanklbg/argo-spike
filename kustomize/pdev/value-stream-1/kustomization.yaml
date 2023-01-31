@@ -1,9 +1,0 @@
-commonLabels:
-  value-stream: "value-stream-1"
-
-resources:
-- ./namespace-1
-- ./namespace-1-a
-
-# patchesStrategicMerge:
-# - ./value-stream-1/namespace.yaml

@@ -1,6 +1,0 @@
-commonLabels:
-  env: pdev
-
-resources:
-- ./value-stream-1
-- ./value-stream-2

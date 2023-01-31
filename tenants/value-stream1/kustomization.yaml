@@ -1,0 +1,7 @@
+commonLabels:
+  valuestream: value-stream1
+
+resources:
+- ./namespace1
+- ./namespace2
+

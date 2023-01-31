@@ -1,6 +1,0 @@
-commonLabels:
-  env: dev
-
-resources:
-- ./value-stream-1
-- ./value-stream-2

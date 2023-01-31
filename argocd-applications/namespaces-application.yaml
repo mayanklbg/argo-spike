@@ -2,17 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-ingress-controller
+  name: manage-namespaces
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/mayanklbg/argo-spike.git
     targetRevision: HEAD
-    path: adons/ingress-nginx
-    # helm:
-    #   valueFiles:
-    #   - '{{filepath}}'
+    path: tenants
   destination:
     server: https://kubernetes.default.svc
   syncPolicy:

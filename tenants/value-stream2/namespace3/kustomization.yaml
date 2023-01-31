@@ -1,10 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: namespace-1-dev
+namespace: namespace3
 
 bases:
-- ../../../base
+- ../../base
 
 patches:
 - target:
@@ -13,14 +13,14 @@ patches:
   patch: |-
     - op: replace
       path: /metadata/name
-      value: namespace-1-dev
+      value: namespace3
 - target:
     kind: ResourceQuota
     name: resource-quota
   patch: |-
     - op: replace
       path: /spec/hard/limits.cpu
-      value: 1 
+      value: 2
     - op: replace
       path: /spec/hard/services
-      value: 200
+      value: 540
