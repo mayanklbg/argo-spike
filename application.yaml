@@ -78,7 +78,7 @@ spec:
   generators:
   - list:
       elements:
-      - filepath: values.yaml
+      - filepath: certificate-manager/values.yaml
         name: cert-manager
       # - filepath: namespaces/ns-2/ns.yaml
       #   name: helm-namespace2
@@ -98,7 +98,7 @@ spec:
       source:
         repoURL: https://github.com/mayanklbg/argo-spike.git
         targetRevision: HEAD
-        path: adons/certificate-manager
+        path: adons
         helm:
           valueFiles:
           - '{{filepath}}'
