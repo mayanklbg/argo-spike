@@ -1,19 +1,47 @@
 ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: manage-namespaces
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/mayanklbg/argo-spike.git
+#     targetRevision: HEAD
+#     path: tenants
+#   destination:
+#     server: https://kubernetes.default.svc
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+# ---
+
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: manage-namespaces
-  namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/mayanklbg/argo-spike.git
-    targetRevision: HEAD
-    path: tenants
-  destination:
-    server: https://kubernetes.default.svc
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+  generators:
+  - git:
+      repoURL: https://github.com/mayanklbg/argo-spike.git
+      revision: HEAD
+      directories:
+      - path: tenants/*
+  template:
+    metadata:
+      name: '{{path[0]}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/mayanklbg/argo-spike.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
 ---
