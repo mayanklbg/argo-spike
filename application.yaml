@@ -78,7 +78,7 @@ spec:
   generators:
   - list:
       elements:
-      - filepath: adons/certificate-manager/values.yaml
+      - filepath: values.yaml
         name: cert-manager
       # - filepath: namespaces/ns-2/ns.yaml
       #   name: helm-namespace2
