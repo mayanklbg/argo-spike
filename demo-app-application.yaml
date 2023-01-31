@@ -1,0 +1,22 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mayanklbg/argo-spike.git
+    targetRevision: HEAD
+    path: adons/demo-app
+    # helm:
+    #   valueFiles:
+    #   - '{{filepath}}'
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
