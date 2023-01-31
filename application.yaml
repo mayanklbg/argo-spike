@@ -55,20 +55,6 @@ spec:
   #   path: kustomize/dev
   # destination:
   #   server: https://kubernetes.default.svc
-
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: kustomize-manage-namespaces-for-pdev
-#   namespace: argocd
-# spec:
-#   project: default
-#   source:
-#     repoURL: https://github.com/mayanklbg/argo-spike.git
-#     targetRevision: HEAD
-#     path: kustomize/pdev
-#   destination:
-#     server: https://kubernetes.default.svc
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
@@ -79,10 +65,10 @@ spec:
   generators:
   - list:
       elements:
-      - filepath: certificate-manager/values.yaml
+      - filepath: values.yaml
         name: cert-manager
-      - filepath: ingress-nginx/values.yaml
-        name: ingress-nginx
+      # - filepath: namespaces/ns-2/ns.yaml
+      #   name: helm-namespace2
       # - filepath: namespaces/ns-3/ns.yaml
       #   name: helm-namespace3
   template:
@@ -99,12 +85,30 @@ spec:
       source:
         repoURL: https://github.com/mayanklbg/argo-spike.git
         targetRevision: HEAD
-        path: adons
+        path: adons/certificate-manager
         helm:
           valueFiles:
           - '{{filepath}}'
       destination:
         server: 'https://kubernetes.default.svc'
         # namespace: openshift-gitops
+
 ---
 
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-ingress-controller
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/mayanklbg/argo-spike.git
+    targetRevision: HEAD
+    path: adons/ingress-nginx
+    # helm:
+    #   valueFiles:
+    #   - '{{filepath}}'
+  destination:
+    server: https://kubernetes.default.svc
+---
