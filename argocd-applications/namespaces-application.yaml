@@ -28,10 +28,10 @@ spec:
       repoURL: https://github.com/mayanklbg/argo-spike.git
       revision: HEAD
       directories:
-      - path: tenants/*
+      - path: tenants
   template:
     metadata:
-      name: '{{path[0]}}'
+      name: '{{path.basename}}'
     spec:
       project: default
       source:
