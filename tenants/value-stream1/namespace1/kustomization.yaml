@@ -24,3 +24,17 @@ patches:
     - op: replace
       path: /spec/hard/services
       value: 200
+- target:
+    kind: RoleBinding
+    name: default-dev
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: namespace1
+- target:
+    kind: Role
+    name: default-dev
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: namespace1
